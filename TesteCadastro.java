@@ -1,4 +1,4 @@
-package LoginTeste;
+package TesteCadastro;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -17,8 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class LoginTest {
-
+public class TesteCadastro {
 
     WebDriver navegador;
 
@@ -33,28 +32,26 @@ public class LoginTest {
         return dateFormat.format(date);
     }
     @Test
-    public void test() throws IOException {
-
+    public void test() throws IOException{
         navegador.manage().window().maximize();
-        navegador.get("https://accounts.google.com/AccountChooser/identifier?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=AccountChooser");
-        navegador.findElement(By.cssSelector("#identifierId")).sendKeys("pulanuvensdobem@gmail.com");
-        navegador.findElement(By.xpath("//div[@id='identifierNext']/div/button/div[2]")).click();
-        navegador.manage().timeouts().implicitlyWait(14, TimeUnit.SECONDS);
-        navegador.findElement(By.xpath("//input[@name='password']")).sendKeys("@PulaNuvens01    ");
-        try {Thread.sleep(10000);}catch (Exception erro){}
+        navegador.get("https://www.youtube.com/");
+        navegador.findElement(By.cssSelector(".style-suggestive #text")).click();
+        navegador.findElement(By.cssSelector(".NlWrkb")).click();
+        navegador.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        navegador.findElement(By.xpath("//div[@id='initialView']/div[2]/div[2]/div/div/span/div[2]/div")).click();
+        navegador.findElement(By.id("firstName")).sendKeys("pula");
+        navegador.findElement(By.id("lastName")).sendKeys("nuvens");
+        navegador.findElement(By.id("username")).sendKeys("pulanuvensdobem3@gmail.com");
+        navegador.findElement(By.name("Passwd")).sendKeys("@PulaNuvens01");
+        navegador.findElement(By.name("ConfirmPasswd")).sendKeys("@PulaNuvens01");
         navegador.findElement(By.cssSelector(".VfPpkd-LgbsSe-OWXEXe-k8QpJ > .VfPpkd-RLmnJb")).click();
-        try {Thread.sleep(10000);}catch (Exception erro){}
-        navegador.findElement(By.cssSelector(".gb_Da")).click();
-        navegador.manage().timeouts().implicitlyWait(14, TimeUnit.SECONDS);
-        String validacao =navegador.findElement(By.cssSelector(".gb_mb")).getText();
-        Assert.assertEquals("Pula Nuvens",validacao);
+        String confirmar= navegador.getTitle();
+        Assert.assertEquals("Criar sua Conta do Google",confirmar);
 
         TakesScreenshot ts=(TakesScreenshot) navegador;
         File soucer=ts.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(soucer,new File("./screenshot/login.png"+getDate()));
-
-
-
-
     }
 }
+
+
